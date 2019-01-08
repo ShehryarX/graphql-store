@@ -101,6 +101,12 @@ const RootQuery = new GraphQLObjectType({
         return products;
       }
     },
+    availableProducts: {
+      type: new GraphQLList(ProductType),
+      resolve(parent, args) {
+        return products.filter(product => product.inventory_count > 0);
+      }
+    },
     shoppingCarts: {
       type: new GraphQLList(ShoppingCartType),
       resolve(parent, args) {
