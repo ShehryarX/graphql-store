@@ -7,7 +7,9 @@ const {
   GraphQLFloat,
   GraphQLInt,
   GraphQLSchema,
-  GraphQLID
+  GraphQLID,
+  GraphQLList,
+  GraphQLNonNull
 } = graphql;
 
 // dummy data
@@ -17,7 +19,11 @@ let products = [
   { id: "3", title: "Fitbit Versa", price: 155.49, inventory_count: 39 }
 ];
 
-let shoppingCarts = [{ id: "1" }, { id: "2" }, { id: "3" }];
+let shoppingCarts = [
+  { id: "1", numberOfItems: 2, products: ["1"], totalPrice: 2.99 },
+  { id: "2", numberOfItems: 1, products: ["1", "2", "3"], totalPrice: 24.99 },
+  { id: "3", numberOfItems: 30, products: ["3"], totalPrice: 26.99 }
+];
 
 const ProductType = new GraphQLObjectType({
   name: "Product",
@@ -42,11 +48,24 @@ const ShoppingCartType = new GraphQLObjectType({
   fields: () => ({
     id: {
       type: GraphQLID
+    },
+    products: {
+      type: new GraphQLList(ProductType),
+      resolve(parent, args) {
+        let found = [];
+        parent.products.forEach(productId => {
+          let res = _.find(products, { id: productId });
+          found.push(res);
+        });
+        return found;
+      }
+    },
+    numberOfItems: {
+      type: GraphQLInt
+    },
+    totalPrice: {
+      type: GraphQLFloat
     }
-    // // products
-    // total: {
-    //   type: GraphQLFloat
-    // }
   })
 });
 
