@@ -6,7 +6,8 @@ const {
   GraphQLString,
   GraphQLFloat,
   GraphQLInt,
-  GraphQLSchema
+  GraphQLSchema,
+  GraphQLID
 } = graphql;
 
 // dummy data
@@ -16,11 +17,13 @@ let products = [
   { id: "3", title: "Fitbit Versa", price: 155.49, inventory_count: 39 }
 ];
 
+let shoppingCarts = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
 const ProductType = new GraphQLObjectType({
   name: "Product",
   fields: () => ({
     id: {
-      type: GraphQLString
+      type: GraphQLID
     },
     title: {
       type: GraphQLString
@@ -34,6 +37,19 @@ const ProductType = new GraphQLObjectType({
   })
 });
 
+const ShoppingCartType = new GraphQLObjectType({
+  name: "ShoppingCart",
+  fields: () => ({
+    id: {
+      type: GraphQLID
+    }
+    // // products
+    // total: {
+    //   type: GraphQLFloat
+    // }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -41,20 +57,26 @@ const RootQuery = new GraphQLObjectType({
       type: ProductType,
       args: {
         id: {
-          type: GraphQLString
-        },
-        resolve(parent, args) {
-          // fetch from database
-          return _.find(products, { id: args.id });
+          type: GraphQLID
         }
+      },
+      resolve(parent, args) {
+        // fetch from database
+        return _.find(products, { id: args.id });
+      }
+    },
+    shoppingCart: {
+      type: ShoppingCartType,
+      args: {
+        id: {
+          type: GraphQLID
+        }
+      },
+      resolve(parent, args) {
+        return _.find(shoppingCarts, { id: args.id });
       }
     }
   }
 });
 
-// const ShoppingCartType = new GraphQLObjectType({
-//   name: "Shopping Cart",
-//   fields: {() => ({})}
-// });
-
-module.exports = new GraphQLSchema(RootQuery);
+module.exports = new GraphQLSchema({ query: RootQuery });
