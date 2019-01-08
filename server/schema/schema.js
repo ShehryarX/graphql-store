@@ -8,6 +8,13 @@ const {
   GraphQLSchema
 } = graphql;
 
+// dummy data
+let products = [
+  { id: "1", title: "Google Pixel XL", price: 299.99, inventory_count: 19 },
+  { id: "2", title: "Macbook Pro 2018", price: 1299.99, inventory_count: 2 },
+  { id: "3", title: "Fitbit Versa", price: 155.49, inventory_count: 39 }
+];
+
 const ProductType = new GraphQLObjectType({
   name: "Product",
   fields: () => ({
