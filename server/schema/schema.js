@@ -94,6 +94,18 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return _.find(shoppingCarts, { id: args.id });
       }
+    },
+    products: {
+      type: new GraphQLList(ProductType),
+      resolve(parent, args) {
+        return products;
+      }
+    },
+    shoppingCarts: {
+      type: new GraphQLList(ShoppingCartType),
+      resolve(parent, args) {
+        return shoppingCarts;
+      }
     }
   }
 });
