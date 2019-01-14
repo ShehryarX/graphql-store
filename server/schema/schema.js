@@ -128,9 +128,9 @@ const Mutation = new GraphQLObjectType({
     addProduct: {
       type: ProductType,
       args: {
-        title: { type: GraphQLString },
-        price: { type: GraphQLFloat },
-        inventoryCount: { type: GraphQLInt }
+        title: { type: GraphQLNonNull(GraphQLString) },
+        price: { type: GraphQLNonNull(GraphQLFloat) },
+        inventoryCount: { type: GraphQLNonNull(GraphQLInt) }
       },
       resolve(parent, args) {
         const { title, price, inventoryCount } = args;
