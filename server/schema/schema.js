@@ -14,19 +14,6 @@ const {
   GraphQLNonNull
 } = graphql;
 
-// dummy data
-let products = [
-  { id: "1", title: "Google Pixel XL", price: 299.99, inventoryCount: 19 },
-  { id: "2", title: "Macbook Pro 2018", price: 1299.99, inventoryCount: 2 },
-  { id: "3", title: "Fitbit Versa", price: 155.49, inventoryCount: 39 }
-];
-
-let shoppingCarts = [
-  { id: "1", numberOfItems: 2, products: ["1"], totalPrice: 2.99 },
-  { id: "2", numberOfItems: 1, products: ["1", "2", "3"], totalPrice: 24.99 },
-  { id: "3", numberOfItems: 30, products: ["3"], totalPrice: 26.99 }
-];
-
 const ProductType = new GraphQLObjectType({
   name: "Product",
   fields: () => ({
@@ -71,15 +58,16 @@ const ShoppingCartType = new GraphQLObjectType({
     }
   })
 });
-
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     product: {
+      description: "Returns Product object",
       type: ProductType,
       args: {
         id: {
-          type: GraphQLID
+          type: GraphQLID,
+          description: "The GraphQLID of a product"
         }
       },
       resolve(parent, args) {
@@ -89,9 +77,11 @@ const RootQuery = new GraphQLObjectType({
     },
     shoppingCart: {
       type: ShoppingCartType,
+      description: "Returns ShoppingCart object",
       args: {
         id: {
-          type: GraphQLID
+          type: GraphQLID,
+          description: "The GraphQLID of a shopping cart"
         }
       },
       resolve(parent, args) {
@@ -100,12 +90,14 @@ const RootQuery = new GraphQLObjectType({
       }
     },
     products: {
+      description: "Returns list of all products",
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
         return Product.find();
       }
     },
     availableProducts: {
+      description: "Returns list of all available products",
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
         return Product.find()
@@ -114,6 +106,7 @@ const RootQuery = new GraphQLObjectType({
       }
     },
     shoppingCarts: {
+      description: "Returns list of all shopping carts (admin feature)",
       type: new GraphQLList(ShoppingCartType),
       resolve(parent, args) {
         return ShoppingCart.find();
@@ -126,11 +119,19 @@ const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addProduct: {
+      description:
+        "Adds new product products collection and returns upon success",
       type: ProductType,
       args: {
-        title: { type: GraphQLNonNull(GraphQLString) },
-        price: { type: GraphQLNonNull(GraphQLFloat) },
-        inventoryCount: { type: GraphQLNonNull(GraphQLInt) }
+        title: { type: GraphQLNonNull(GraphQLString), description: "Title" },
+        price: {
+          type: GraphQLNonNull(GraphQLFloat),
+          description: "Price in CAD"
+        },
+        inventoryCount: {
+          type: GraphQLNonNull(GraphQLInt),
+          description: "Current inventory count"
+        }
       },
       resolve(parent, args) {
         const { title, price, inventoryCount } = args;
@@ -143,6 +144,8 @@ const Mutation = new GraphQLObjectType({
       }
     },
     addShoppingCart: {
+      description:
+        "Creates new shopping cart to shopping carts collection and returns upon success",
       type: ShoppingCartType,
       args: {},
       resolve(parent, args) {
@@ -155,10 +158,18 @@ const Mutation = new GraphQLObjectType({
       }
     },
     addProductToShoppingCart: {
+      description:
+        "Adds product to shopping cart and returns updated shopping cart",
       type: ShoppingCartType,
       args: {
-        productId: { type: GraphQLNonNull(GraphQLID) },
-        shoppingCartId: { type: GraphQLNonNull(GraphQLID) }
+        productId: {
+          type: GraphQLNonNull(GraphQLID),
+          description: "The GraphQLID of the product"
+        },
+        shoppingCartId: {
+          type: GraphQLNonNull(GraphQLID),
+          description: "The GraphQLID of the shopping cart"
+        }
       },
       resolve(parent, args) {
         const { productId, shoppingCartId } = args;
@@ -204,9 +215,13 @@ const Mutation = new GraphQLObjectType({
       }
     },
     checkoutShoppingCart: {
+      description: "Proceeds to checkout items in shopping cart",
       type: ShoppingCartType,
       args: {
-        shoppingCartId: { type: GraphQLNonNull(GraphQLID) }
+        shoppingCartId: {
+          type: GraphQLNonNull(GraphQLID),
+          description: "The GraphQLID of a shopping cart"
+        }
       },
       resolve(parent, args) {
         const { shoppingCartId } = args;
