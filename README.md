@@ -1,4 +1,4 @@
-# shopify-intern-challenge
+# Shopify Internship Challenge
 
 This is my submission for the Shopify Internship Challenge Summer '19.
 
