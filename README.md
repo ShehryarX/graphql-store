@@ -4,6 +4,8 @@ This is my submission for the Shopify Internship Challenge Summer '19.
 
 Initially, I chose create a RESTful API using Node and Express. In the early stages of development, I realized how tedious the endpoints I created were. After looking up GraphQL, my perspective on API development completely pivoted! GraphQL is not only easy to implement, but even easier to use. Plus, I wanted to learn something new. For this reason, I chose to implement the API using GraphQL.
 
+Here's a quick [link](https://shehryarx.github.io/shopify-intern-challenge/) to the server docs: 
+
 ## Overview
 
 Let's understand the problem. We want to model the interaction between two objects: products and shopping carts. What we want to be able to do by the end of this is:
