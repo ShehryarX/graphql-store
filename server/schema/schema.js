@@ -128,7 +128,7 @@ const Mutation = new GraphQLObjectType({
   fields: {
     addProduct: {
       description:
-        "Adds new product products collection and returns upon success",
+        "Adds new product products collection and returns added product upon success",
       type: ProductType,
       args: {
         title: { type: GraphQLNonNull(GraphQLString), description: "Title" },
@@ -153,7 +153,7 @@ const Mutation = new GraphQLObjectType({
     },
     addShoppingCart: {
       description:
-        "Creates new shopping cart to shopping carts collection and returns upon success",
+        "Creates new shopping cart to shopping carts collection and returns added shopping cart upon success",
       type: ShoppingCartType,
       args: {},
       resolve(parent, args) {
@@ -223,7 +223,8 @@ const Mutation = new GraphQLObjectType({
       }
     },
     checkoutShoppingCart: {
-      description: "Proceeds to checkout items in shopping cart",
+      description:
+        "Proceeds to checkout items in shopping cart and returns updated shopping cart upon success",
       type: ShoppingCartType,
       args: {
         shoppingCartId: {
