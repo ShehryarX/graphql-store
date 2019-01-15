@@ -1,6 +1,6 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLID, GraphQLList } = graphql;
-const { ProductType, ShoppingCartType } = require("./types");
+const { ProductType, ShoppingCartType } = require("../types/types");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",

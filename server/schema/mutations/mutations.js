@@ -8,9 +8,9 @@ const {
   GraphQLNonNull
 } = graphql;
 
-const { ProductType, ShoppingCartType } = require("./types");
-const Product = require("../models/Product");
-const ShoppingCart = require("../models/ShoppingCart");
+const { ProductType, ShoppingCartType } = require("../types/types");
+const Product = require("../../models/Product");
+const ShoppingCart = require("../../models/ShoppingCart");
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
