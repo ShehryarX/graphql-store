@@ -1,7 +1,7 @@
 # Shopify Internship Challenge
 
 ## Quick Links:
-[Documentation](https://shehryarx.github.io/shopify-intern-challenge/)  
+[Documentation](https://shehryarx.github.io/shopify-intern-challenge/) (hosted in docs/)
 [Live server](https://shielded-waters-96177.herokuapp.com/graphql)
 
 To run the code locally:  
