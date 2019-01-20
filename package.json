@@ -1,0 +1,22 @@
+{
+  "name": "shopify-intern-challenge",
+  "version": "1.0.0",
+  "description": "This is my submission for the Shopify Internship Challenge Summer '19.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node /server/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShehryarX/shopify-intern-challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShehryarX/shopify-intern-challenge/issues"
+  },
+  "homepage": "https://github.com/ShehryarX/shopify-intern-challenge#readme"
+}
