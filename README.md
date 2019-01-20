@@ -161,6 +161,7 @@ mutation {
 ```
 
 Checkout shopping cart:
+Note: Once you checkout, you will see the product inventory updated when you fetch all products.
 
 ```
 mutation {
