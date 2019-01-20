@@ -59,9 +59,13 @@ As of now, we can query information about:
 We should be able to manipulate this data. Here are the methods I've implemented:
 
 - Create product
+  - Adds a new product given required parameters (see docs)
 - Create shopping cart
 - Add product to shopping cart
+  - Updates the product list inside the ShoppingCart object
 - Checkout shopping cart
+  - Will ensure there are enough products to be checkout out
+  - Will update product count upon successful purchase
 
 ## Documentation
 
