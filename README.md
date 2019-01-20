@@ -4,6 +4,13 @@
 [Documentation](https://shehryarx.github.io/shopify-intern-challenge/)  
 [Live server](https://shielded-waters-96177.herokuapp.com/graphql)
 
+To run the code locally:  
+`git clone https://github.com/ShehryarX/shopify-intern-challenge`  
+`cd server/`   
+`npm install && npm start`
+
+Navigate to `localhost:4000/graphql`.
+
 ## Abstract
 This is my submission for the Shopify Internship Challenge Summer '19.
 
