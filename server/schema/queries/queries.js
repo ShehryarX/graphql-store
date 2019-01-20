@@ -2,6 +2,9 @@ const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLID, GraphQLList } = graphql;
 const { ProductType, ShoppingCartType } = require("../types/types");
 
+const ShoppingCart = require("../../models/ShoppingCart");
+const Product = require("../../models/Product");
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {

@@ -7,6 +7,7 @@ const {
   GraphQLID,
   GraphQLList
 } = graphql;
+const Product = require("../../models/Product");
 
 const ProductType = new GraphQLObjectType({
   name: "Product",
