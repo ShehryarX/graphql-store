@@ -16,6 +16,11 @@ This is my submission for the Shopify Internship Challenge Summer '19.
 
 Initially, I chose create a RESTful API using Node and Express. In the early stages of development, I realized how tedious the endpoints I created were. After looking up GraphQL, my perspective on API development completely pivoted! GraphQL is not only easy to implement, but even easier to use. Plus, I wanted to learn something new. For this reason, I chose to implement the API using GraphQL. All the back-end is stored on MongoDB (mlab) through interfacing with mongoose. 
 
+## Stack
+- GraphQL for all things server
+- MongoDB for all database storage
+- GraphiQL for API testing
+
 ## Overview
 
 Let's understand the problem. We want to model the interaction between two objects: products and shopping carts. What we want to be able to do by the end of this is:
