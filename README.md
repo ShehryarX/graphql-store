@@ -266,3 +266,7 @@ mutation {
 Before I dive in to things I did, what I could have done differently and other cool stuff, I'll go over my experience coding this back-end. This was my first time using GraphQL, and I have to say that it was amazing! Some improvements I've noticed that GraphQL gets rid of is underfetching and overfetching. Users in the front-end simply request exactly what they need. It was really easy and quick to code the API. GraphQL enabled rapid prototype development and I've witnessed firsthand how fast it can be used to develop an API. Lastly, the docs and community are awesome! I don't think I'll go back to RESTful and CRUDful APIs soon, it's time to learn more about the power of GraphQL.
 
 1. One thing I noticed during the challenge was the simplicity of using `await` and `async`. I would refactor the Promises into using `await` and `async` to create cleaner code.
+2. I should learn more about unit testing because I usually end up testing the code myself
+3. GraphQL is really cool and easy to interface with as compared to RESTful APIs
+4. I also would've added authentication using JWTs and bycrypt.js
+5. I would have added more unit testing functionality to account for the edge cases in my code
