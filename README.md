@@ -2,12 +2,7 @@
 
 ## Quick Links:
 
-<<<<<<< HEAD
-
 [Github Repo](https://github.com/ShehryarX/shopify-intern-challenge)  
-[Documentation](https://shehryarx.github.io/shopify-intern-challenge/)  
-[Live server](https://shielded-waters-96177.herokuapp.com/graphql)
-=======
 [Documentation](https://shehryarx.github.io/shopify-intern-challenge/) hosted from `docs/`  
 [Live server](https://shielded-waters-96177.herokuapp.com/graphql) hosted on Heroku
 
@@ -17,8 +12,6 @@ To run the code locally:
 `npm install && npm start`
 
 Navigate to `localhost:4000/graphql`.
-
-> > > > > > > 353910f03538af6c423023ff3f9e959641e303d5
 
 ## Abstract
 
