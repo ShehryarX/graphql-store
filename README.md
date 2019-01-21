@@ -101,7 +101,27 @@ This is reflected by the `app.js` file.
 
 I've never done unit testing before, but I learned how using Medium. I read up on a few articles about using `mocha`, `chai`, and `expect` to develop a systematic way of testing the API. I quickly wrote up a few tests that check the Mongo models and ensure their properties are correct, as well as a database connection test.
 
-In the future, I would add more unit tests to chekc the function of the API as well. You can find the tests in `test.js` inside the `server/` directory.
+In the future, I would add more unit tests to chekc the function of the API as well. You can find the tests in `test.js` inside the `server/` directory. You can run the tests by running `npm run test-server`.
+
+It should give the following output:
+
+```
+Product Schema
+    ✓ Should have title of type String
+    ✓ Should have price of type number
+    ✓ Should have inventoryCount of type number
+
+  Shopping Cart Schema
+    ✓ Should have numberOfItems of type number
+    ✓ Should have totalPrice of type number
+    ✓ Should have products of type array of numbers
+
+  Testing the database
+    ✓ Connect to the database (233ms)
+
+
+  7 passing (254ms)
+```
 
 ## Documentation
 
