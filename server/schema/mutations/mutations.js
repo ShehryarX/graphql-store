@@ -56,6 +56,7 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         const { id } = args;
 
+        // finds product and deletes it
         Product.findById(id)
           .then(product => {
             if (product) {
