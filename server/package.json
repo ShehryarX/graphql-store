@@ -13,6 +13,7 @@
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
+    "graphql-depth-limit": "^1.1.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.3"
   }

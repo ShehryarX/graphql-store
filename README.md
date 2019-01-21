@@ -1,10 +1,13 @@
 # Shopify Internship Challenge
 
 ## Quick Links:
+
+[Github Repo](https://github.com/ShehryarX/shopify-intern-challenge)  
 [Documentation](https://shehryarx.github.io/shopify-intern-challenge/)  
 [Live server](https://shielded-waters-96177.herokuapp.com/graphql)
 
 ## Abstract
+
 This is my submission for the Shopify Internship Challenge Summer '19.
 
 Initially, I chose create a RESTful API using Node and Express. In the early stages of development, I realized how tedious the endpoints I created were. After looking up GraphQL, my perspective on API development completely pivoted! GraphQL is not only easy to implement, but even easier to use. Plus, I wanted to learn something new. For this reason, I chose to implement the API using GraphQL.
@@ -44,6 +47,8 @@ const ShoppingCartSchema = new Schema({
 });
 ```
 
+Note that what we could have done is refer to the product by any other paramater like user ID. In practicaility, you would probably have a JSON web token transfer. Due to this reason, I chose to model the shopping cart based on a randomly generated seed value. This would also enable users to create a shopping cart in local storage, without sigining up for the store itself.
+
 ## Queries
 
 As of now, we can query information about:
@@ -67,11 +72,23 @@ We should be able to manipulate this data. Here are the methods I've implemented
   - Will ensure there are enough products to be checkout out
   - Will update product count upon successful purchase
 
+## Adding Security
+
+All parameters on the API protect against:
+
+- Inputs of `null`
+- Invalid MongoIDs
+
+Depth limiting:
+To prevent attacks where a hacker could provide deep queries, we prevent against access a very high depth. The current API will prevent against depths greater than 6. As you can imagine, having a very high depth means more time is devoted toward resolving that query. In all cases of our use, we wouldn't want to exceed a depth of 6.
+
+This is reflected by the `app.js` file.
+
 ## Documentation
 
 Here's the documentation [link](https://shehryarx.github.io/shopify-intern-challenge/) to the server.
 
-Below are some queries you will probably want to test. You can test them live on a Heroku server I deployed [right here](https://shielded-waters-96177.herokuapp.com/graphql).
+Below are some queries you will probably want to test. You can test them live on a Heroku server I deployed [right here](https://shielded-waters-96177.herokuapp.com/graphql). Note this might take a few seconds to set up because the Heroku server probably needs to spin up again.
 
 List all shopping carts:
 
@@ -117,6 +134,29 @@ List all available products (inventory available):
 }
 ```
 
+Create a product:
+
+```
+mutation {
+  addProduct(title, price, inventoryCount) {
+    id
+    title
+    price
+    inventoryCount
+  }
+}
+```
+
+Delete a product:
+
+```
+mutation {
+  deleteProduct(id){
+    id
+  }
+}
+```
+
 Register a shopping cart:
 
 ```
@@ -131,6 +171,16 @@ mutation {
       price
       inventoryCount
     }
+  }
+}
+```
+
+Delete a shopping cart:
+
+```
+mutation {
+  deleteProduct(id){
+    id
   }
 }
 ```
@@ -157,7 +207,7 @@ Checkout shopping cart:
 
 ```
 mutation {
-  checkoutShoppingCart(shoppingCartId){
+  checkoutShoppingCart(shoppingCartId) {
     id
     totalPrice
     numberOfItems
@@ -170,3 +220,9 @@ mutation {
   }
 }
 ```
+
+## Reflection
+
+Before I dive in to things I did, what I could have done differently and other cool stuff, I'll go over my experience coding this back-end. This was my first time using GraphQL, and I have to say that it was amazing! Some improvements I've noticed that GraphQL gets rid of is underfetching and overfetching. Users in the front-end simply request exactly what they need. It was really easy and quick to code the API. GraphQL enabled rapid prototype development and I've witnessed firsthand how fast it can be used to develop an API. Lastly, the docs and community are awesome! I don't think I'll go back to RESTful and CRUDful APIs soon, it's time to learn more about the power of GraphQL.
+
+1. One thing I noticed during the challenge was the simplicity of using `await` and `async`. I would refactor the Promises into using `await` and `async` to create cleaner code.

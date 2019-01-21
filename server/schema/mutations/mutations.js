@@ -32,12 +32,39 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         const { title, price, inventoryCount } = args;
+
+        // create product
         let product = new Product({
           title,
           price,
           inventoryCount
         });
+
+        // save to database
         return product.save();
+      }
+    },
+    deleteProduct: {
+      description: "Deletes product and returns null upon success",
+      type: ProductType,
+      args: {
+        id: {
+          type: GraphQLID,
+          description: "The GraphQLID of a product"
+        }
+      },
+      resolve(parent, args) {
+        const { id } = args;
+
+        Product.findById(id)
+          .then(product => {
+            if (product) {
+              return product.delete();
+            } else {
+              return "Can't find product";
+            }
+          })
+          .catch(err => "Can't find Product");
       }
     },
     addShoppingCart: {
@@ -52,6 +79,29 @@ const Mutation = new GraphQLObjectType({
           products: []
         });
         return shoppingCart.save();
+      }
+    },
+    deleteShoppingCart: {
+      description: "Deletes shopping cart and returns null upon success",
+      type: ProductType,
+      args: {
+        id: {
+          type: GraphQLID,
+          description: "The GraphQLID of a shopping cart"
+        }
+      },
+      resolve(parent, args) {
+        const { id } = args;
+
+        ShoppingCart.findById(id)
+          .then(shoppingCart => {
+            if (shoppingCart) {
+              return shoppingCart.delete();
+            } else {
+              return "Can't find shopping cart";
+            }
+          })
+          .catch(err => "Can't find shopping cart");
       }
     },
     addProductToShoppingCart: {
@@ -71,9 +121,11 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         const { productId, shoppingCartId } = args;
         return new Promise((resolve, reject) => {
+          // find product
           Product.findById(productId)
             .then(product => {
               if (product) {
+                // find shopping cart
                 ShoppingCart.findById(shoppingCartId).then(shoppingCart => {
                   let deductions = 0;
 
@@ -82,11 +134,13 @@ const Mutation = new GraphQLObjectType({
                     if (shoppingCart.products[i].id === productId) ++deductions;
                   }
 
+                  // make sure we can check out all products
                   if (product.inventoryCount - deductions <= 0) {
                     return reject("Product inventory has ran out");
                   }
 
                   if (shoppingCart) {
+                    // update shopping cart parameters
                     shoppingCart.numberOfItems++;
                     shoppingCart.totalPrice += product.price;
                     shoppingCart.products.push(productId);
@@ -97,6 +151,7 @@ const Mutation = new GraphQLObjectType({
                       products
                     } = shoppingCart;
 
+                    // save to database
                     shoppingCart
                       .update({
                         numberOfItems,
@@ -131,13 +186,14 @@ const Mutation = new GraphQLObjectType({
         const { shoppingCartId } = args;
 
         return new Promise((resolve, reject) => {
+          // find shopping cart
           ShoppingCart.findById(shoppingCartId)
             .then(shoppingCart => {
               if (shoppingCart) {
                 let promises = [];
-
                 let productInfo = {};
 
+                // track frequency of each product in shopping cart
                 shoppingCart.products.forEach(productId => {
                   const { _id } = productId;
                   if (!productInfo[_id]) {
@@ -148,9 +204,12 @@ const Mutation = new GraphQLObjectType({
 
                 let keys = Object.keys(productInfo);
 
+                // ensure we can checkout each item
                 for (let i = 0; i < keys.length; i++) {
                   let key = keys[i];
                   let count = productInfo[key];
+
+                  // create a promise to remove a piece of inventory
                   promises.push(
                     Product.findById(key).then(product => {
                       const { inventoryCount } = product;
@@ -165,11 +224,14 @@ const Mutation = new GraphQLObjectType({
                   );
                 }
 
+                // wait for promise to finish
                 Promise.all(promises).then(() => {
+                  // create empty shopping cart
                   shoppingCart.numberOfItems = 0;
                   shoppingCart.totalPrice = 0;
                   shoppingCart.products = [];
 
+                  // save to database
                   shoppingCart
                     .update({
                       numberOfItems: 0,

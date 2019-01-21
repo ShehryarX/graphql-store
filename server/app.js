@@ -1,4 +1,5 @@
 const express = require("express");
+const depthLimit = require("graphql-depth-limit");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
@@ -18,7 +19,8 @@ app.use(
   "/graphql",
   graphqlHTTP({
     schema,
-    graphiql: true
+    graphiql: true,
+    validationRules: [depthLimit(6)]
   })
 );
 

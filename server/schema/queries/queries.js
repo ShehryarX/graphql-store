@@ -19,6 +19,8 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         const { id } = args;
+
+        // find and return product
         return Product.findById(id);
       }
     },
@@ -33,6 +35,8 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         const { id } = args;
+
+        // find and return shopping cart
         return ShoppingCart.findById(id);
       }
     },
@@ -47,6 +51,7 @@ const RootQuery = new GraphQLObjectType({
       description: "Returns list of all available products",
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
+        // find and return products with inventory count greater than 0
         return Product.find()
           .where("inventoryCount")
           .gt(0);
@@ -56,6 +61,7 @@ const RootQuery = new GraphQLObjectType({
       description: "Returns list of all shopping carts (admin feature)",
       type: new GraphQLList(ShoppingCartType),
       resolve(parent, args) {
+        // find and return all shopping carts
         return ShoppingCart.find();
       }
     }
