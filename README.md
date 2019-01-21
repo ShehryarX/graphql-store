@@ -2,15 +2,35 @@
 
 ## Quick Links:
 
+<<<<<<< HEAD
+
 [Github Repo](https://github.com/ShehryarX/shopify-intern-challenge)  
 [Documentation](https://shehryarx.github.io/shopify-intern-challenge/)  
 [Live server](https://shielded-waters-96177.herokuapp.com/graphql)
+=======
+[Documentation](https://shehryarx.github.io/shopify-intern-challenge/) hosted from `docs/`  
+[Live server](https://shielded-waters-96177.herokuapp.com/graphql) hosted on Heroku
+
+To run the code locally:  
+`git clone https://github.com/ShehryarX/shopify-intern-challenge`  
+`cd server/`  
+`npm install && npm start`
+
+Navigate to `localhost:4000/graphql`.
+
+> > > > > > > 353910f03538af6c423023ff3f9e959641e303d5
 
 ## Abstract
 
 This is my submission for the Shopify Internship Challenge Summer '19.
 
-Initially, I chose create a RESTful API using Node and Express. In the early stages of development, I realized how tedious the endpoints I created were. After looking up GraphQL, my perspective on API development completely pivoted! GraphQL is not only easy to implement, but even easier to use. Plus, I wanted to learn something new. For this reason, I chose to implement the API using GraphQL.
+Initially, I chose create a RESTful API using Node and Express. In the early stages of development, I realized how tedious the endpoints I created were. After looking up GraphQL, my perspective on API development completely pivoted! GraphQL is not only easy to implement, but even easier to use. Plus, I wanted to learn something new. For this reason, I chose to implement the API using GraphQL. All the back-end is stored on MongoDB (mlab) through interfacing with mongoose.
+
+## Stack
+
+- GraphQL for all things server
+- MongoDB for all database storage
+- GraphiQL for API testing
 
 ## Overview
 
@@ -203,7 +223,8 @@ mutation {
 }
 ```
 
-Checkout shopping cart:
+Checkout shopping cart:  
+Note: Once you checkout, you will see the product inventory updated when you fetch all products.
 
 ```
 mutation {
