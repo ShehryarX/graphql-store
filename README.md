@@ -101,7 +101,7 @@ This is reflected by the `app.js` file.
 
 I've never done unit testing before, but I learned how using Medium. I read up on a few articles about using `mocha`, `chai`, and `expect` to develop a systematic way of testing the API. I quickly wrote up a few tests that check the Mongo models and ensure their properties are correct, as well as a database connection test.
 
-In the future, I would add more unit tests to chekc the function of the API as well.
+In the future, I would add more unit tests to chekc the function of the API as well. You can find the tests in `test.js` inside the `server/` directory.
 
 ## Documentation
 
