@@ -1,4 +1,4 @@
-# Shopify Internship Challenge
+# GraphQL 
 
 ## Quick Links:
 
@@ -14,8 +14,6 @@ To run the code locally:
 Navigate to `localhost:4000/graphql`.
 
 ## Abstract
-
-This is my submission for the Shopify Internship Challenge Summer '19.
 
 Initially, I chose create a RESTful API using Node and Express. In the early stages of development, I realized how tedious the endpoints I created were. After looking up GraphQL, my perspective on API development completely pivoted! GraphQL is not only easy to implement, but even easier to use. Plus, I wanted to learn something new. For this reason, I chose to implement the API using GraphQL. All the back-end is stored on MongoDB (mlab) through interfacing with mongoose.
 
